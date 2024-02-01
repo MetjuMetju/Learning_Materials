@@ -6,41 +6,17 @@
 5. Init
 6. Runlevel
 
-###
-1. and 2. BIOS (firmware interfaces):
-BIOS and UEFI. First, the BIOS (Basic Input/Output System) or UEFI (Unified Extensible Firmware Interface) program
-kicks in once the system powers up.
-BIOS uses MBR, UEFI uses GUID Partiotion Table (GPT)  next they runs the power-on self-test (POST).
+### boot process of Linux
+1. BIOS/UEFI	- initializes hardware and loads bootloader from storage,
+		UEFI (Unified Extensible Firmware Interface)
+2. Bootloader	- loads and executes the Linux kernel
+3. Kernel	- nitializes system components and mounts the root filesystem
+4. Init		- spawns user-space processes and completes the boot sequence
 
-3. Boot Loader
-fdisk -l # check the system partition
-Hard drive / USB / CD
-types: LILO / SYSILINUX / GRUB2
-LILO - obsolete
-SYSLINUX supports several major filesystems: FAT, ext2, ext3, ext4, Btrfs and XFS filesystems with some constraints.
-GRUB2 - has replaced its past version (GRUB), which is now known as GRUB Legacy.
-Has:
-- ability to boot multiple operating systems
-- boots both a graphical and a text-based interface
-- allows ease of use over a serial cable
-- strong command line interface for interactive configuration
-- network-based diskless booting
-sudo grub-install -V
-
-4. Kernel
-5. Systemd
-6. Run Levels
-Runlevel 0	shuts down the system
-Runlevel 1	single-user mode
-Runlevel 2	multi-user mode without networking
-Runlevel 3	multi-user mode with networking
-Runlevel 4	user-definable
-
-sudo reboot
-sudo init 6 # reboot
-sudo shutdown -r now # This will perform a system shutdown in a proper way and then reboot the computer.
-sudo shutdown -h now This will perform a system shutdown in a proper way.
-sudo poweroff
-sudo halt is another way to shutdown.
-sudo init 0
-
+1. Runlevel 0 (Halt):				System shutdown.
+2. Runlevel 1 (Single User):			Minimal mode with basic services.
+3. Runlevel 2 (Multi-User):			Full multi-user mode without network.
+4. Runlevel 3 (Multi-User with Networking): 	Full multi-user mode with networking.
+5. Runlevel 4 (Unused):				Custom runlevel, often unused.
+6. Runlevel 5 (Graphical):			Full multi-user mode with graphical interface.
+7. Runlevel 6 (Reboot):				System restart.
